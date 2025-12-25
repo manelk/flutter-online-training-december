@@ -1,60 +1,48 @@
 import 'package:flutter/material.dart';
-import 'package:online_training/data/apod_data.dart';
+import 'package:online_training/mock/apod_data.dart';
 import 'package:intl/intl.dart';
+import 'package:online_training/models/apod_model.dart';
+import 'package:online_training/services/apod_service.dart';
 import 'package:online_training/widgets/apod_widget.dart';
 
-class ApodScreen extends StatelessWidget {
+class ApodScreen extends StatefulWidget {
   const ApodScreen({super.key});
+
+  @override
+  State<ApodScreen> createState() => _ApodScreenState();
+}
+
+class _ApodScreenState extends State<ApodScreen> {
+  @override
+  void initState() {
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
     // first step trying data static
     final apod = apods[1];
 
+    /// LINK OF DOCUMENTATION: https://api.flutter.dev/flutter/widgets/FutureBuilder-class.html
     return Scaffold(
       appBar: AppBar(title: Text("Asto picture of the day")),
-      body: ListView.builder(
-        itemCount: apods.length,
-        itemBuilder: (context, index) {
-          return Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: ApodWidget(apod: apods[index]),
-          );
-          // VERSION 1 OF UI
-          // SizedBox(
-          //   height: MediaQuery.sizeOf(context).height * 0.5,
-          //   child: Card(
-          //     color: Colors.orange.shade100,
-          //     elevation: 4,
-          //     shape: RoundedRectangleBorder(
-          //       borderRadius: BorderRadius.circular(16.0),
-          //     ),
-          //     child: Padding(
-          //       padding: const .all(8.0),
-          //       child: Column(
-          //         spacing: 8.0,
-          //         crossAxisAlignment: .start,
-          //         children: [
-          //           Text(apods[index].title),
-          //           Text(
-          //             DateFormat.yMMMMEEEEd().format(apods[index].date),
-          //             style: TextStyle(fontSize: 12),
-          //           ),
-          //           AspectRatio(
-          //             aspectRatio: 16 / 9,
-          //             child: Image.network(
-          //               height: 300,
-          //               apods[index].url,
-          //               errorBuilder: (context, error, stackTrace) {
-          //                 return Text("Error showing the image from network.");
-          //               },
-          //             ),
-          //           ),
-          //         ],
-          //       ),
-          //     ),
-          //   ),
-          // );
+      body: FutureBuilder<List<ApodModel>>(
+        future: ApodService().fetchApods(),
+        builder: (context, snapshot) {
+          if (snapshot.hasData) {
+            return ListView.builder(
+              itemCount: apods.length,
+              itemBuilder: (context, index) {
+                return Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: ApodWidget(apod: apods[index]),
+                );
+              },
+            );
+          } else if (snapshot.hasError) {
+            Text("error");
+          }
+          return Center(child: CircularProgressIndicator());
         },
       ),
     );

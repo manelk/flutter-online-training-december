@@ -22,7 +22,15 @@ class ApodWidget extends StatelessWidget {
         child: Stack(
           children: [
             // Background Image
-            Positioned.fill(child: Image.network(apod.url, fit: BoxFit.cover)),
+            Positioned.fill(
+              child: Image.network(
+                apod.url,
+                fit: BoxFit.cover,
+                errorBuilder: (context, error, stackTrace) {
+                  return CircularProgressIndicator();
+                },
+              ),
+            ),
             // Text Content
             Positioned(
               bottom: 20,

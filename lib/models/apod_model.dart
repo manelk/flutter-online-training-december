@@ -1,3 +1,4 @@
+/// LINK: https://app.quicktype.io/
 class ApodModel {
   final String copyright;
   final String explanation;
@@ -12,8 +13,17 @@ class ApodModel {
     required this.url,
     required this.date,
   });
+
+  factory ApodModel.fromJson(Map<String, dynamic> json) => ApodModel(
+    copyright: json["copyright"],
+    date: DateTime.parse(json["date"]),
+    explanation: json["explanation"],
+    title: json["title"],
+    url: json["url"],
+  );
 }
 
+// we are not going to use this
 class ApodModelUnamedParams {
   final String copyright;
   final String explanation;
