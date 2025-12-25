@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:online_training/screens/apod_screen.dart';
-import 'package:online_training/screens/home_screen.dart';
 
 void main() {
   runApp(const MyApp());

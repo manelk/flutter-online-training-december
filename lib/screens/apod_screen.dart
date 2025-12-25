@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:online_training/mock/apod_data.dart';
-import 'package:intl/intl.dart';
 import 'package:online_training/models/apod_model.dart';
 import 'package:online_training/services/apod_service.dart';
 import 'package:online_training/widgets/apod_widget.dart';

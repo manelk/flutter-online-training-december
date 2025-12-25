@@ -1,9 +1,10 @@
 import 'dart:convert';
 
+import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
 import 'package:online_training/models/apod_model.dart';
 
-/// L
+/// LINK: https://docs.flutter.dev/cookbook/networking/fetch-data
 class ApodService {
   Future<List<ApodModel>> fetchApods() async {
     var url = Uri.parse(
@@ -17,7 +18,9 @@ class ApodService {
       // decode the response
       final List<dynamic> jsonList = jsonDecode(response.body);
 
-      print("jsonList : $jsonList");
+      if (kDebugMode) {
+        print("jsonList : $jsonList");
+      }
 
       // need to map the upcoming apod model into a list
       return jsonList.map((element) => ApodModel.fromJson(element)).toList();
