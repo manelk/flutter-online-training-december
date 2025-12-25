@@ -14,53 +14,68 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Flutter app'),
-        backgroundColor: Colors.deepPurpleAccent,
-      ),
-      body: Column(
-        children: [
-          /// Display element next to each other which are the image and the user data:
-          /// firstname, lastname, age, birthdate
-          Row(
-            children: [
-              Image.asset("assets/images/photo_person.jpeg", height: 200),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Row(
+    return SafeArea(
+      child: Scaffold(
+        appBar: AppBar(
+          title: Text('Flutter app'),
+          backgroundColor: Colors.deepPurpleAccent,
+        ),
+        body: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            /// Display element next to each other which are the image and the user data:
+            /// firstname, lastname, age, birthdate
+            Row(
+              children: [
+                Image.asset("assets/images/photo_person.jpeg", height: 200),
+                Center(
+                  child: Column(
+                    mainAxisSize: MainAxisSize.max,
+                    crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      Text(
-                        "First Name: ",
-                        style: TextStyle(color: Colors.redAccent, fontSize: 16),
+                      Row(
+                        children: [
+                          Text(
+                            "First Name: ",
+                            style: TextStyle(
+                              color: Colors.redAccent,
+                              fontSize: 16,
+                            ),
+                          ),
+                          Text(firstName ?? ""),
+                        ],
                       ),
-                      Text(firstName ?? ""),
+                      Row(
+                        children: [
+                          Text(
+                            "Last Name: ",
+                            style: TextStyle(
+                              color: Colors.redAccent,
+                              fontSize: 16,
+                            ),
+                          ),
+                          Text(lastName),
+                        ],
+                      ),
+                      Row(
+                        children: [
+                          Text(
+                            "Birthdate: ",
+                            style: TextStyle(
+                              color: Colors.redAccent,
+                              fontSize: 16,
+                            ),
+                          ),
+                          Text(birthDate),
+                        ],
+                      ),
                     ],
                   ),
-                  Row(
-                    children: [
-                      Text(
-                        "Last Name: ",
-                        style: TextStyle(color: Colors.redAccent, fontSize: 16),
-                      ),
-                      Text(lastName),
-                    ],
-                  ),
-                  Row(
-                    children: [
-                      Text(
-                        "Birthdate: ",
-                        style: TextStyle(color: Colors.redAccent, fontSize: 16),
-                      ),
-                      Text(birthDate),
-                    ],
-                  ),
-                ],
-              ),
-            ],
-          ),
-        ],
+                ),
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }

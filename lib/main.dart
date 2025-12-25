@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:online_training/screens/apod_screen.dart';
 import 'package:online_training/screens/home_screen.dart';
 
 void main() {
@@ -13,7 +14,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(colorScheme: .fromSeed(seedColor: Colors.deepPurple)),
-      home: const HomeScreen(lastName: "Kacem", birthDate: "00/00/0000"),
+      home: const ApodScreen(),
     );
   }
 }
